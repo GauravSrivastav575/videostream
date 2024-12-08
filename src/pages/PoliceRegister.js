@@ -6,7 +6,9 @@ function PoliceRegister() {
 
   const onSubmit = async (data) => {
     try {
-        let result = await fetch("http://192.168.1.24:5000/signupWeb", {
+      // let url = 'http://192.168.45.24:5000/';
+      let url = 'https://server-sih-1.onrender.com';
+        let result = await fetch(`${url}/signupWeb`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json", // Set the header for JSON

@@ -16,7 +16,9 @@ function ReportMissingPerson() {
     formData.append("isAdmin", true);
 
     try {
-      const response = await fetch("http://192.168.45.24:5000/report", {
+      // let url = 'http://192.168.45.24:5000/';
+      let url = 'https://server-sih-1.onrender.com';
+      const response = await fetch(`${url}/report`, {
         method: "POST",
         body: formData, // No need for 'Content-Type'
       });

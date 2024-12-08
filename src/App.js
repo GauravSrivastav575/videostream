@@ -6,19 +6,41 @@ import Camera from "./pages/Camera";
 import Home from "./pages/Home";
 import MissingPersonList from "./pages/MissingPersonList";
 import ReportMissingPerson from "./pages/ReportMissingPerson";
+import Sidebar from "./components/Sidebar";
+import Crime from "./pages/Crime";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/policeReg" Component={PoliceRegister} />
-        <Route path="/camera" Component={Camera} />
-        <Route path="/missingPersonList" Component={MissingPersonList} />
-        <Route path="/reportMissingPerson" Component={ReportMissingPerson} />
-      </Routes>
+      <div className="flex">
+        <div>
+          <Sidebar />
+        </div>
+        <div className="w-full">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/policeReg" element={<PoliceRegister />} />
+            <Route path="/camera" element={<Camera />} />
+            <Route path="/missingPersonList" element={<MissingPersonList />} />
+            <Route path="/crime" element={<Crime />} />
+            <Route
+              path="/reportMissingPerson"
+              Component={ReportMissingPerson}
+            />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+// home,
+// stream
+// reports krne
+// repoet dekhne status
+// heat map
+// crime detection
+// police records
+//
