@@ -1,39 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 function Camera() {
-    const [ipAddresses, setIpAddresses] = useState([]);
+  const [ipAddresses, setIpAddresses] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+  // let url = 'http://192.168.45.24:5000/';
+  let url = 'https://server-sih-1.onrender.com';
   const handleAddIp = async () => {
     if (inputValue.trim() !== "") {
-      let result = await fetch('http://192.168.45.24:5000/camUrl', {
+      let result = await fetch(`${url}/camUrl`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Set the header for JSON
         },
-        body: JSON.stringify({ name:'varun', url: inputValue }), // Properly stringify the data
+        body: JSON.stringify({ name: "varun", url: inputValue }), // Properly stringify the data
       });
       result = await result.json();
-      if(result.success){
-        setIpAddresses([...ipAddresses, result.djangoResponse]);        
+      if (result.success) {
+        setIpAddresses([...ipAddresses, result.djangoResponse]);
       }
       setInputValue("");
     }
   };
-  useEffect(()=>{
-    async function fetchIpData(){
-      let result = await fetch('http://192.168.45.24:5000/camUrl');
+  useEffect(() => {
+    async function fetchIpData() {
+      let result = await fetch(`${url}/camUrl`);
       result = await result.json();
-      if(result.success){
+      if (result.success) {
         setIpAddresses(result.ipIds);
-        console.log(result.ipIds)
+        console.log(result.ipIds);
       }
-
     }
     fetchIpData();
-  },[setIpAddresses])
+  }, [setIpAddresses]);
   return (
     <div className="app-container">
       {" "}
@@ -50,17 +51,21 @@ function Camera() {
       </div>{" "}
       <div className="image-container">
         {" "}
-        {ipAddresses.length>0?ipAddresses.map((ip, index) => (
-          <img
-            key={index}
-            src={ip.url}
-            alt={`IP: ${ip.url}`}
-            className="ip-image"
-          />
-        )):<div>no camera found</div>}{" "}
+        {ipAddresses.length > 0 ? (
+          ipAddresses.map((ip, index) => (
+            <img
+              key={index}
+              src={ip.url}
+              alt={`IP: ${ip.url}`}
+              className="ip-image"
+            />
+          ))
+        ) : (
+          <div>no camera found</div>
+        )}{" "}
       </div>{" "}
     </div>
-  )
+  );
 }
 
-export default Camera
+export default Camera;
