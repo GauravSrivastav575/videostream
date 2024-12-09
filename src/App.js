@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import PoliceRegister from "./pages/PoliceRegister";
@@ -8,8 +8,24 @@ import MissingPersonList from "./pages/MissingPersonList";
 import ReportMissingPerson from "./pages/ReportMissingPerson";
 import Sidebar from "./components/Sidebar";
 import Crime from "./pages/Crime";
+import { getFCMToken, requestNotificationPermission } from "./firebase";
 
 function App() {
+  useEffect(() => {
+    const setupNotifications = async () => {
+        const permissionGranted = await requestNotificationPermission();
+        if (permissionGranted) {
+            // Fetch FCM token
+            const token = await getFCMToken();
+            if (token) {
+                console.log("FCM Token: ", token);
+            }
+        }
+    };
+
+    setupNotifications();
+}, []);
+
   return (
     <BrowserRouter>
       <div className="flex">
@@ -43,4 +59,3 @@ export default App;
 // heat map
 // crime detection
 // police records
-//
