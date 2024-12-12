@@ -26,3 +26,14 @@ messaging.onBackgroundMessage((payload) => {
 
     self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration('/firebase-messaging-sw.js')
+        .then((registration) => {
+            if (!registration) {
+                navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                    .then((reg) => console.log('Service Worker registered:', reg))
+                    .catch((err) => console.error('Service Worker registration failed:', err));
+            }
+        });
+}

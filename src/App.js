@@ -9,25 +9,30 @@ import ReportMissingPerson from "./pages/ReportMissingPerson";
 import Sidebar from "./components/Sidebar";
 import Crime from "./pages/Crime";
 import { getFCMToken, requestNotificationPermission } from "./firebase";
+import { Toaster} from "react-hot-toast";
 
 function App() {
   useEffect(() => {
     const setupNotifications = async () => {
+      console.log('noti called');
         const permissionGranted = await requestNotificationPermission();
         if (permissionGranted) {
             // Fetch FCM token
             const token = await getFCMToken();
             if (token) {
-                console.log("FCM Token: ", token);
+                console.log("your FCM Token: ", token);
             }
         }
+        else{
+          console.log('denied')
+        }
     };
-
     setupNotifications();
 }, []);
 
   return (
     <BrowserRouter>
+    <Toaster/>
       <div className="flex">
         <div>
           <Sidebar />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MP_POLICE_LOGO from "../assets/MP_POLICE_LOGO.png";
 import MP_GOV_LOGO from "../assets/MP_GOV_LOGO.png";
-import { TbLogout2, TbReportSearch } from "react-icons/tb";
+import { TbLogout2, TbReportSearch, TbShoppingBagExclamation } from "react-icons/tb";
 import { TiHomeOutline } from "react-icons/ti";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { CgDanger } from "react-icons/cg";
@@ -31,10 +31,15 @@ function Sidebar() {
       url: "/missingPersonList",
       icon: <HiOutlineStatusOnline className="text-xl" />,
     },
+    // {
+    //   name: "Object Detection",
+    //   url: "/objectDetection",
+    //   icon: <CgDanger className="text-xl" />,
+    // },
     {
       name: "Crime Detection",
       url: "/crime",
-      icon: <CgDanger className="text-xl" />,
+      icon: <TbShoppingBagExclamation className="text-xl" />,
     },
     {
       name: "Police Records",
@@ -60,7 +65,7 @@ function Sidebar() {
             to={link.url}
             key={index}
             onClick={()=>{setActive(index)}}
-            className={"flex hover:bg-gray-300 p-2 gap-2 items-center rounded-lg" + (active==index?' bg-gray-300':'')}
+            className={"flex hover:bg-gray-300 p-2 gap-2 items-center rounded-lg" + (active===index?' bg-gray-300':'')}
           >
             {link.icon}
             <div>{link.name}</div>
